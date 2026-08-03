@@ -14,7 +14,9 @@ import {
   Briefcase,
   BookOpen,
   MousePointerClick,
-  Compass
+  Compass,
+  Monitor,
+  LayoutGrid
 } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { apiService } from '../api/client';
@@ -54,6 +56,41 @@ export const HomePage: React.FC = () => {
     { number: '03', title: 'Interactive Graph', desc: 'Explore 3-hop connected nodes', icon: Network },
     { number: '04', title: 'Projects', desc: 'Build portfolio projects for your gaps', icon: FolderKanban },
     { number: '05', title: 'Career Roles', desc: 'Track readiness % for industry roles', icon: Briefcase },
+  ];
+
+  const fourSections = [
+    {
+      num: '1',
+      title: 'Roadmap Studio',
+      desc: 'Interactive skill chip picker & openCypher dependency ordering engine.',
+      icon: Compass,
+      color: 'text-indigo-600',
+      bg: 'bg-indigo-50 border-indigo-200'
+    },
+    {
+      num: '2',
+      title: 'Interactive Cytoscape Visualizer',
+      desc: 'Full-screen canvas supporting 3-hop traversals & node metadata inspection.',
+      icon: Network,
+      color: 'text-sky-600',
+      bg: 'bg-sky-50 border-sky-200'
+    },
+    {
+      num: '3',
+      title: 'Career Roles Match Ranking',
+      desc: 'Readiness % score meter, target market salary, & skill gap analysis.',
+      icon: Briefcase,
+      color: 'text-amber-600',
+      bg: 'bg-amber-50 border-amber-200'
+    },
+    {
+      num: '4',
+      title: 'Recommended Projects & Resources',
+      desc: 'Portfolio projects with 1-skill Quick Win badges & curated course links.',
+      icon: FolderKanban,
+      color: 'text-emerald-600',
+      bg: 'bg-emerald-50 border-emerald-200'
+    }
   ];
 
   const handleQuickSelectSkill = (skillId: string) => {
@@ -198,6 +235,71 @@ export const HomePage: React.FC = () => {
 
             </div>
           </motion.div>
+
+        </div>
+      </section>
+
+      {/* NEW SECTION: PLATFORM SCREENSHOT SHOWCASE & 4-MODULE BREAKDOWN */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="p-6 sm:p-10 rounded-3xl glass-panel bg-white border border-slate-200 space-y-8 shadow-sm">
+          
+          <div className="text-center max-w-3xl mx-auto space-y-2">
+            <Badge variant="primary">Platform Architecture Showcase</Badge>
+            <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+              4-Section Module Showcase
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600">
+              Complete visual breakdown of the 4 core modules powering SkillGraph AI.
+            </p>
+          </div>
+
+          {/* 4 Feature Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {fourSections.map((sec) => (
+              <div
+                key={sec.num}
+                className={`p-4 rounded-2xl border ${sec.bg} space-y-2 shadow-sm transition-all hover:scale-105`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-white border border-slate-200 text-slate-700">
+                    Section 0{sec.num}
+                  </span>
+                  <sec.icon className={`w-4 h-4 ${sec.color}`} />
+                </div>
+                <h3 className="font-bold text-sm text-slate-900">{sec.title}</h3>
+                <p className="text-xs text-slate-600 leading-relaxed">{sec.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Screenshot Browser Frame Container */}
+          <div className="rounded-3xl bg-slate-900 border border-slate-800 p-2 sm:p-4 shadow-2xl overflow-hidden relative group">
+            
+            {/* macOS Browser Bar */}
+            <div className="flex items-center justify-between px-3 py-2 border-b border-slate-800 mb-3 bg-slate-950/60 rounded-t-2xl">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-rose-500 inline-block" />
+                <span className="w-3 h-3 rounded-full bg-amber-500 inline-block" />
+                <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block" />
+              </div>
+              <div className="px-4 py-1 rounded-xl bg-slate-900 border border-slate-800 text-[11px] font-mono text-slate-400 font-medium truncate max-w-xs sm:max-w-md">
+                https://skillgraph-ai.vercel.app/showcase
+              </div>
+              <div className="flex items-center gap-2 text-slate-400">
+                <Monitor className="w-4 h-4" />
+              </div>
+            </div>
+
+            {/* Platform Screenshot Image */}
+            <div className="relative overflow-hidden rounded-xl border border-slate-800">
+              <img
+                src="/screenshort.png"
+                alt="SkillGraph AI 4-Section Platform Overview"
+                className="w-full h-auto object-cover rounded-xl shadow-lg transition-transform duration-500 group-hover:scale-[1.01]"
+              />
+            </div>
+
+          </div>
 
         </div>
       </section>
