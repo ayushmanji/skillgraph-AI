@@ -1,6 +1,18 @@
 # ⚡ SkillGraph AI
 
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-skillgraph--ai--ashen.vercel.app-4f46e5?style=for-the-badge&logo=vercel)](https://skillgraph-ai-ashen.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/📦_GitHub_Repo-ayushmanji%2Fskillgraph--AI-090d16?style=for-the-badge&logo=github)](https://github.com/ayushmanji/skillgraph-AI)
+
+> 🚀 **Live Production Application**: **[https://skillgraph-ai-ashen.vercel.app](https://skillgraph-ai-ashen.vercel.app)**
+>
 > Production-quality, graph database-powered Skill Discovery & Career Learning Roadmap Platform built for **CognoDB Cloud** using React, TypeScript, Vite, Tailwind CSS, Node.js, Express, and openCypher queries (via official Neo4j JS driver compatibility layer).
+
+---
+
+## 🌐 Live Production Demo & GitHub Repository
+
+- 🔗 **Live Hosted App**: [https://skillgraph-ai-ashen.vercel.app](https://skillgraph-ai-ashen.vercel.app)
+- 📁 **GitHub Source Code**: [https://github.com/ayushmanji/skillgraph-AI.git](https://github.com/ayushmanji/skillgraph-AI.git)
 
 ---
 
