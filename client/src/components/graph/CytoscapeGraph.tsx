@@ -33,7 +33,6 @@ const NODE_COLORS: Record<string, string> = {
 export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
   data,
   height = '500px',
-  selectedNodeId,
   onSelectNode,
   filterNodeType = 'ALL'
 }) => {
@@ -98,8 +97,8 @@ export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
             'text-margin-y': 6,
             'border-width': '2px',
             'border-color': '#cbd5e1',
-            'width': '36px',
-            'height': '36px',
+            'width': '34px',
+            'height': '34px',
             'transition-property': 'background-color, border-color, border-width',
             'transition-duration': 0.2
           }
@@ -151,8 +150,8 @@ export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
       layout: {
         name: layoutName,
         animate: true,
-        animationDuration: 600,
-        padding: 50
+        animationDuration: 500,
+        padding: 40
       } as any
     });
 
@@ -208,31 +207,31 @@ export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
           n.addClass('dimmed');
         }
       });
-      setActivePathMessage(`3-Hop Subgraph Traversal: ${hopsData.length} Connected Skills Found`);
+      setActivePathMessage(`3-Hop Subgraph: ${hopsData.length} Connected Skills`);
     } catch (err) {
       console.error('Hops expansion error:', err);
     }
   };
 
-  const handleZoomIn = () => cyRef.current?.zoom(cyRef.current.zoom() * 1.2);
-  const handleZoomOut = () => cyRef.current?.zoom(cyRef.current.zoom() * 0.8);
-  const handleResetFit = () => cyRef.current?.fit(undefined, 40);
+  const handleZoomIn = () => cyRef.current?.zoom(cyRef.current.zoom() * 1.25);
+  const handleZoomOut = () => cyRef.current?.zoom(cyRef.current.zoom() * 0.75);
+  const handleResetFit = () => cyRef.current?.fit(undefined, 30);
 
   return (
-    <div className="relative w-full rounded-2xl glass-panel border border-slate-200 overflow-hidden group bg-white">
+    <div className="relative w-full rounded-2xl glass-panel border border-slate-200 overflow-hidden bg-white">
       
-      {/* Top Controls Toolbar */}
-      <div className="absolute top-4 left-4 right-4 z-10 flex flex-wrap items-center justify-between gap-3 pointer-events-none">
+      {/* Top Controls Toolbar - Fully Responsive */}
+      <div className="absolute top-3 left-3 right-3 z-10 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
         
         {/* Layout Switcher */}
-        <div className="flex items-center gap-1.5 p-1.5 rounded-xl bg-white/90 border border-slate-200 backdrop-blur-md pointer-events-auto shadow-sm">
-          <Layers className="w-3.5 h-3.5 text-indigo-600 ml-2" />
-          <span className="text-[11px] font-mono font-bold text-slate-500 uppercase mr-1">Layout:</span>
+        <div className="flex items-center gap-1 p-1 sm:p-1.5 rounded-xl bg-white/90 border border-slate-200 backdrop-blur-md pointer-events-auto shadow-sm overflow-x-auto max-w-full">
+          <Layers className="w-3.5 h-3.5 text-indigo-600 ml-1 sm:ml-2 shrink-0" />
+          <span className="hidden sm:inline text-[10px] font-mono font-bold text-slate-500 uppercase mr-1">Layout:</span>
           {(['cose', 'concentric', 'circle', 'breadthfirst'] as const).map((l) => (
             <button
               key={l}
               onClick={() => setLayoutName(l)}
-              className={`px-2.5 py-1 rounded-lg text-xs font-mono font-semibold capitalize transition-all ${
+              className={`px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg text-[10px] sm:text-xs font-mono font-semibold capitalize whitespace-nowrap transition-all ${
                 layoutName === l
                   ? 'bg-indigo-600 text-white shadow-sm'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
@@ -244,27 +243,27 @@ export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
         </div>
 
         {/* Zoom & Fit Actions */}
-        <div className="flex items-center gap-1 p-1.5 rounded-xl bg-white/90 border border-slate-200 backdrop-blur-md pointer-events-auto shadow-sm">
+        <div className="flex items-center gap-1 p-1 sm:p-1.5 rounded-xl bg-white/90 border border-slate-200 backdrop-blur-md pointer-events-auto shadow-sm">
           <button
             onClick={handleZoomIn}
-            className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all"
+            className="p-1 sm:p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all"
             title="Zoom In"
           >
-            <ZoomIn className="w-4 h-4" />
+            <ZoomIn className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
           <button
             onClick={handleZoomOut}
-            className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all"
+            className="p-1 sm:p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all"
             title="Zoom Out"
           >
-            <ZoomOut className="w-4 h-4" />
+            <ZoomOut className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
           <button
             onClick={handleResetFit}
-            className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all"
+            className="p-1 sm:p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all"
             title="Fit to View"
           >
-            <Maximize2 className="w-4 h-4" />
+            <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
         </div>
 
@@ -272,34 +271,34 @@ export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
 
       {/* Active Traversal Path Notification */}
       {activePathMessage && (
-        <div className="absolute top-16 left-4 z-10 px-3.5 py-2 rounded-xl bg-indigo-50 border border-indigo-200 text-xs font-mono font-bold text-indigo-700 shadow-sm backdrop-blur-md">
+        <div className="absolute top-14 sm:top-16 left-3 z-10 px-3 py-1.5 rounded-xl bg-indigo-50 border border-indigo-200 text-[11px] font-mono font-bold text-indigo-700 shadow-sm backdrop-blur-md">
           {activePathMessage}
         </div>
       )}
 
-      {/* Legend Badge Overlay */}
-      <div className="absolute bottom-4 left-4 z-10 flex flex-wrap items-center gap-2 pointer-events-none">
+      {/* Legend Badges Overlay */}
+      <div className="absolute bottom-3 left-3 right-3 z-10 flex flex-wrap items-center gap-1.5 pointer-events-none max-h-16 overflow-hidden">
         {Object.entries(NODE_COLORS).map(([type, color]) => (
           <div
             key={type}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/90 border border-slate-200 text-[11px] font-mono font-medium text-slate-700 backdrop-blur-md shadow-sm"
+            className="flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/95 border border-slate-200 text-[10px] font-mono font-medium text-slate-700 backdrop-blur-md shadow-sm"
           >
-            <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: color }} />
+            <span className="w-2 h-2 rounded-full" style={{ backgroundColor: color }} />
             <span>{type}</span>
           </div>
         ))}
       </div>
 
       {/* Cytoscape Canvas Container */}
-      <div ref={containerRef} style={{ height }} className="w-full bg-white" />
+      <div ref={containerRef} style={{ height }} className="w-full bg-white min-h-[350px]" />
 
-      {/* Node Inspector Modal / Drawer overlay */}
+      {/* Node Inspector Drawer - Mobile & Desktop Responsive */}
       {inspectedNode && (
-        <div className="absolute top-16 right-4 z-20 w-80 p-4 rounded-2xl bg-white border border-slate-200 shadow-xl animate-in fade-in slide-in-from-right-4 duration-200">
-          <div className="flex items-start justify-between gap-2 mb-3">
+        <div className="absolute inset-x-0 bottom-0 sm:bottom-auto sm:top-16 sm:right-3 sm:left-auto z-20 w-full sm:w-80 p-4 rounded-t-2xl sm:rounded-2xl bg-white border border-slate-200 shadow-2xl max-h-[75vh] overflow-y-auto animate-in fade-in slide-in-from-bottom-4 sm:slide-in-from-right-4 duration-200">
+          <div className="flex items-start justify-between gap-2 mb-2">
             <div>
               <Badge variant="cyan">{inspectedNode.type || 'Node'}</Badge>
-              <h3 className="font-bold text-lg text-slate-900 mt-1">{inspectedNode.name}</h3>
+              <h3 className="font-bold text-base sm:text-lg text-slate-900 mt-1">{inspectedNode.name}</h3>
             </div>
             <button
               onClick={() => {
@@ -318,15 +317,8 @@ export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
           </p>
 
           {inspectedNode.category && (
-            <div className="text-xs text-slate-500 mb-2">
+            <div className="text-xs text-slate-500 mb-1">
               <span className="font-semibold text-slate-700">Category:</span> {inspectedNode.category}
-            </div>
-          )}
-
-          {inspectedNode.level && (
-            <div className="text-xs text-slate-500 mb-3">
-              <span className="font-semibold text-slate-700">Difficulty:</span>{' '}
-              <span className="font-bold text-amber-700">{inspectedNode.level}</span>
             </div>
           )}
 
@@ -344,15 +336,15 @@ export const CytoscapeGraph: React.FC<CytoscapeGraphProps> = ({
           {/* Connected Hops List */}
           {hopNeighbors.length > 0 && (
             <div className="pt-2 border-t border-slate-200">
-              <h4 className="text-[11px] font-mono uppercase font-bold text-slate-500 mb-2 flex items-center gap-1">
+              <h4 className="text-[10px] font-mono uppercase font-bold text-slate-500 mb-2 flex items-center gap-1">
                 <Share2 className="w-3 h-3 text-indigo-600" />
                 Direct Neighbors ({hopNeighbors.length})
               </h4>
-              <div className="flex flex-wrap gap-1 max-h-28 overflow-y-auto pr-1">
+              <div className="flex flex-wrap gap-1 max-h-24 overflow-y-auto pr-1">
                 {hopNeighbors.map((nb) => (
                   <span
                     key={nb.id}
-                    className="px-2 py-0.5 rounded-md bg-slate-100 text-[10px] font-mono text-slate-700 border border-slate-200"
+                    className="px-2 py-0.5 rounded bg-slate-100 text-[10px] font-mono text-slate-700 border border-slate-200"
                   >
                     {nb.name}
                   </span>
