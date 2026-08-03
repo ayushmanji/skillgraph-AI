@@ -36,7 +36,7 @@ export const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <Router>
-        <div className="min-h-screen flex flex-col bg-[#090d16] text-slate-100">
+        <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-indigo-600 selection:text-white">
           <Navbar />
           
           <div className="flex-1 flex max-w-7xl w-full mx-auto">
